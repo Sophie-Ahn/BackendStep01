@@ -23,30 +23,86 @@
 <!--        <url-pattern>/Hello</url-pattern>-->
 <!--    </servlet-mapping>-->
 
-<!--    서블릿 선언-->
-    <servlet>
-        <servlet-name>MemberUpdateServlet</servlet-name>
-        <servlet-class>_14_MemberUpdate_ServletInParam.spms.servlet.MemberUpdateServlet</servlet-class>
-        <init-param>
-            <param-name>driver</param-name>
-            <param-value>com.mysql.cj.jdbc.Driver</param-value>
-        </init-param>
-        <init-param>
-            <param-name>url</param-name>
-            <param-value>jdbc:mysql://localhost:4306/studydb</param-value>
-        </init-param>
-        <init-param>
-            <param-name>username</param-name>
-            <param-value>study</param-value>
-        </init-param>
-        <init-param>
-            <param-name>password</param-name>
-            <param-value>study</param-value>
-        </init-param>
-    </servlet>
-<!--    서블릿과 주소 매핑-->
-    <servlet-mapping>
-        <servlet-name>MemberUpdateServlet</servlet-name>
-        <url-pattern>/memberUpdates/update</url-pattern>
-    </servlet-mapping>
+
+<!--    _14_MemberUpdate_ServletInParam-->
+    <!--    서블릿 선언-->
+<!--    <servlet>-->
+<!--        <servlet-name>MemberUpdateServlet</servlet-name>-->
+<!--        <servlet-class>_14_MemberUpdate_ServletInParam.spms.servlet.MemberUpdateServlet</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>driver</param-name>-->
+<!--            <param-value>com.mysql.cj.jdbc.Driver</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>url</param-name>-->
+<!--            <param-value>jdbc:mysql://localhost:4306/studydb</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>username</param-name>-->
+<!--            <param-value>study</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>password</param-name>-->
+<!--            <param-value>study</param-value>-->
+<!--        </init-param>-->
+<!--    </servlet>-->
+<!--    &lt;!&ndash;    서블릿과 주소 매핑&ndash;&gt;-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>MemberUpdateServlet</servlet-name>-->
+<!--        <url-pattern>/memberUpdate/update</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+
+
+
+<!--    _15_MemberUpdate_Post-->
+<!--&lt;!&ndash;    서블릿 선언&ndash;&gt;-->
+<!--    <servlet>-->
+<!--        <servlet-name>MemberUpdateServlet</servlet-name>-->
+<!--        <servlet-class>_15_MemberUpdate_Post.spms.servlet.MemberUpdateServlet</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>driver</param-name>-->
+<!--            <param-value>com.mysql.cj.jdbc.Driver</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>url</param-name>-->
+<!--            <param-value>jdbc:mysql://localhost:4306/studydb</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>username</param-name>-->
+<!--            <param-value>study</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>password</param-name>-->
+<!--            <param-value>study</param-value>-->
+<!--        </init-param>-->
+<!--    </servlet>-->
+<!--&lt;!&ndash;    서블릿과 주소 매핑&ndash;&gt;-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>MemberUpdateServlet</servlet-name>-->
+<!--        <url-pattern>/membersUpdate/update</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+
+    <display-name>_17_</display-name>
+<!--    컨텍스트 초기화 파라미터
+    컨텍스트 : Web Application, 전체가 공유하는 영역
+    context-param은 모든 서블릿이 접근 가능함
+-->
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.mysql.cj.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:mysql://localhost:4306/studydb</param-value>
+    </context-param>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>study</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>study</param-value>
+    </context-param>
 </web-app>
