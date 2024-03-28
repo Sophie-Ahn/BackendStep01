@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"-->
+<!--         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"-->
+<!--         version="5.0">-->
+    <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+    <!-- 아래의 2가지 설정을 1번에 해주는 것이 @WebServlet 애노테이션이다.
+  	   web.xml은 환경설정 파일이라 서비스 중에 수정이 가능하다는 유연성이 있지만,
+  	   생각보다 만들어진 서비스를 사용하는 시간이 길지 않고, 새로 개발이슈가 많다보니
+  	   개발자 특성상 간편한 걸 선호하므로 '애노테이션'으로 하는 경향이 많다.
+   -->
+
+    <!-- 서블릿 선언(톰캣이 web.xml을 읽어서, 객체 생성 후 브라우저에서 매핑된 주소가 들어오면 이 객체를 호출한다. -->
+
+<!--    <servlet>-->
+<!--        <servlet-name>Hello</servlet-name>-->
+<!--        <servlet-class>_05_ServletLifeCycle.servlet.HelloWorld</servlet-class>-->
+<!--    </servlet>-->
+
+<!--    &lt;!&ndash; 주소와 매핑 &ndash;&gt;-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Hello</servlet-name>-->
+<!--        <url-pattern>/Hello</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    서블릿 선언-->
+    <servlet>
+        <servlet-name>MemberUpdateServlet</servlet-name>
+        <servlet-class>_14_MemberUpdate_ServletInParam.spms.servlet.MemberUpdateServlet</servlet-class>
+        <init-param>
+            <param-name>driver</param-name>
+            <param-value>com.mysql.cj.jdbc.Driver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>jdbc:mysql://localhost:4306/studydb</param-value>
+        </init-param>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>study</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>study</param-value>
+        </init-param>
+    </servlet>
+<!--    서블릿과 주소 매핑-->
+    <servlet-mapping>
+        <servlet-name>MemberUpdateServlet</servlet-name>
+        <url-pattern>/memberUpdates/update</url-pattern>
+    </servlet-mapping>
+</web-app>
