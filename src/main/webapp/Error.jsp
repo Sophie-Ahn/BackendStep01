@@ -14,8 +14,19 @@
     <%
         Exception error = (Exception)request.getAttribute("error");
         String err = error.getMessage();
+        StackTraceElement[] trace = error.getStackTrace();
     %>
     <p>Error: <%=err %></p>
+    <%
+        for(int i = 0; i< trace.length; i++){
+            String stack = trace[i].toString();
+    %>
+        <p>
+            <%=stack %>
+        </p>
+    <%
+        }
+    %>
     <p>
         요청을 처리하는 중에 문제가 발생하였습니다.<br>
         잠시 후에 다시 요청 부탁드립니다.<br>
