@@ -1,6 +1,6 @@
-package _37_MemberListServlet_Dao.dao;
+package _39_ServletContextListener.dao;
 
-import _37_MemberListServlet_Dao.vo.Member;
+import _39_ServletContextListener.vo.Member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ import java.util.List;
 public class MemberDao {
     Connection connection;
     private String strSelectList = "SELECT mno, mname, email,cre_date FROM members ORDER BY mno ASC";
-    private String strInsert = "INSERT INTO members(email, pwd, mname, cre_date,mod_date) VALUES(?,?,?,NOW(),NOW())";
+    private String strInsert = "INSERT INTO members(email, pwd,mname, cre_date,mod_date) VALUES(?,?,?,NOW(),NOW())";
     private String strDelete = "DELETE FROM members WHERE mno = ?";
     private String strSelectOne = "SELECT mno, email, mname, cre_date FROM members WHERE mno = ?";
     private String strUpdate = "UPDATE members SET email = ?, mname = ?, mod_date = NOW() WHERE mno=?";
@@ -103,7 +103,8 @@ public class MemberDao {
             pstmt.setInt(1, no);
             rs = pstmt.executeQuery();
             if (rs.next()){
-                return new Member().setNo(rs.getInt("mno"))
+                return new Member()
+                        .setNo(rs.getInt("mno"))
                         .setEmail(rs.getString("email"))
                         .setName(rs.getString("mname"))
                         .setCreateDate(rs.getDate("cre_date"));

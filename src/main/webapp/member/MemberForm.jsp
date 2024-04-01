@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="_37_MemberListServlet_Dao.vo.Member" %>
 <html>
 <head>
     <title>회원등록</title>
@@ -17,9 +16,9 @@
     <form action="add" method="post">
         이름: <input type='text' name='name'><br>
         이메일: <input type='text' name='email'><br>
-        암호: <input type='text' name='password'><br>
+        암호: <input type='password' name='password'><br>
         <input type='submit' value='추가'>
-        <input type='reset' value='취소'>
+        <input type='reset' value='취소' onclick='location.href="list"'>
     </form>
     <jsp:include page="/Tail.jsp" />
 </body>

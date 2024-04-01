@@ -1,6 +1,7 @@
-package _37_MemberListServlet_Dao.dao;
+package _41_ConnectionPool.dao;
 
-import _37_MemberListServlet_Dao.vo.Member;
+import _41_ConnectionPool.util.DBConnectionPool;
+import _41_ConnectionPool.vo.Member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,24 +14,37 @@ import java.util.List;
 * 이 클래스로 만들어진 오브젝트를 Dao라고 부른다.
 */
 public class MemberDao {
-    Connection connection;
+//    Connection connection;
     private String strSelectList = "SELECT mno, mname, email,cre_date FROM members ORDER BY mno ASC";
-    private String strInsert = "INSERT INTO members(email, pwd, mname, cre_date,mod_date) VALUES(?,?,?,NOW(),NOW())";
+    private String strInsert = "INSERT INTO members(email, pwd,mname, cre_date,mod_date) VALUES(?,?,?,NOW(),NOW())";
     private String strDelete = "DELETE FROM members WHERE mno = ?";
     private String strSelectOne = "SELECT mno, email, mname, cre_date FROM members WHERE mno = ?";
     private String strUpdate = "UPDATE members SET email = ?, mname = ?, mod_date = NOW() WHERE mno=?";
     private String strExist = "SELECT mname, email FROM members WHERE email = ? AND pwd = ?";
 
-    public void setConnection(Connection connection){
-        this.connection = connection;
+    DBConnectionPool connPool;
+    public void setDBConnectionPool(DBConnectionPool connPool){
+        this.connPool = connPool;
     }
+
+    /* Connection 객체 1개로 여러 메서드가 각각의 서블릿에서 호출되면
+    * rollback시 다른 명령에도 영향을 주어서 취소가 되므로
+    * 이제 ConnectionPool을 사용해서 독립적인 명령 처리가 되도록 한다.
+    * */
+//    public void setConnection(Connection connection){
+//        this.connection = connection;
+//    }
 
     // MemberListServlet.java에서 필요
     public List<Member> selectList() throws Exception {
+        Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try{
+            // 커넥션풀에서 객체를 빌려온다.
+            connection = this.connPool.getConnection(); // 추가
+
             pstmt = connection.prepareStatement(strSelectList);
             rs = pstmt.executeQuery();
 
@@ -49,14 +63,22 @@ public class MemberDao {
         } finally {
             try{if(rs != null) rs.close();}catch (Exception e){}
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
+            if(connection != null){
+                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+                connPool.returnConnection(connection);
+            }
         }
     }
 
     // MemberAddServlet 서블릿에서 필요
     public int insert(Member member) throws Exception{
+        Connection connection = null;
         PreparedStatement pstmt = null;
 
         try {
+            // 커넥션풀에서 객체를 빌려온다.
+            connection = this.connPool.getConnection(); // 추가
+
             pstmt = connection.prepareStatement(strInsert);
             pstmt.setString(1, member.getEmail());
             pstmt.setString(2, member.getPassword());
@@ -74,14 +96,23 @@ public class MemberDao {
             throw e;
         } finally {
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
+
+            if(connection != null){
+                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+                connPool.returnConnection(connection);
+            }
         }
     }
 
     // MemberDeleteServlet 서블릿에서 필요
     public int delete(int no) throws Exception{
+        Connection connection = null;
         PreparedStatement pstmt = null;
 
         try {
+            // 커넥션풀에서 객체를 빌려온다.
+            connection = this.connPool.getConnection(); // 추가
+
             pstmt = connection.prepareStatement(strDelete);
             pstmt.setInt(1, no);
 
@@ -90,20 +121,29 @@ public class MemberDao {
             throw e;
         } finally {
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
+            if(connection != null){
+                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+                connPool.returnConnection(connection);
+            }
         }
     }
 
     // MemberUpdateServlet에서 get요청시 필요
     public Member selectOne(int no) throws Exception{
+        Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
+            // 커넥션풀에서 객체를 빌려온다.
+            connection = this.connPool.getConnection(); // 추가
+
             pstmt = connection.prepareStatement(strSelectOne);
             pstmt.setInt(1, no);
             rs = pstmt.executeQuery();
             if (rs.next()){
-                return new Member().setNo(rs.getInt("mno"))
+                return new Member()
+                        .setNo(rs.getInt("mno"))
                         .setEmail(rs.getString("email"))
                         .setName(rs.getString("mname"))
                         .setCreateDate(rs.getDate("cre_date"));
@@ -115,14 +155,22 @@ public class MemberDao {
         } finally {
             try{if(rs != null) rs.close();}catch (Exception e){}
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
+            if(connection != null){
+                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+                connPool.returnConnection(connection);
+            }
         }
     }
 
     // MemberUpdateServlet에서 post요청시 필요
     public int update(Member member) throws Exception{
+        Connection connection = null;
         PreparedStatement pstmt = null;
 
         try {
+            // 커넥션풀에서 객체를 빌려온다.
+            connection = this.connPool.getConnection(); // 추가
+
             pstmt = connection.prepareStatement(strUpdate);
             pstmt.setString(1, member.getEmail());
             pstmt.setString(2, member.getName());
@@ -133,15 +181,23 @@ public class MemberDao {
             throw e;
         } finally {
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
+            if(connection != null){
+                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+                connPool.returnConnection(connection);
+            }
         }
     }
 
     // LogInServlet에서 필요
     public Member exist(String email, String password) throws Exception{
+        Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
+            // 커넥션풀에서 객체를 빌려온다.
+            connection = this.connPool.getConnection(); // 추가
+
             pstmt = connection.prepareStatement(strExist);
             pstmt.setString(1, email);
             pstmt.setString(2, password);
@@ -159,6 +215,10 @@ public class MemberDao {
         } finally {
             try{if(rs != null) rs.close();}catch (Exception e){}
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
+            if(connection != null){
+                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+                connPool.returnConnection(connection);
+            }
         }
     }
 }
