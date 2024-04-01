@@ -1,6 +1,6 @@
-package _41_ConnectionPool.servlet;
+package _43_Tomcat_DataSource.servlet;
 
-import _41_ConnectionPool.dao.MemberDao;
+import _43_Tomcat_DataSource.dao.MemberDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @SuppressWarnings("serial")
-@WebServlet("/memberConnPool/delete")
+@WebServlet("/memberTomcatDataSource/delete")
 public class MemberDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,7 +1,7 @@
-package _39_ServletContextListener.servlet;
+package _43_Tomcat_DataSource.servlet;
 
-import _39_ServletContextListener.dao.MemberDao;
-import _39_ServletContextListener.vo.Member;
+import _43_Tomcat_DataSource.dao.MemberDao;
+import _43_Tomcat_DataSource.vo.Member;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @SuppressWarnings("serial")
-@WebServlet("/memberListener/update")
+@WebServlet("/memberTomcatDataSource/update")
 public class MemberUpdateServlet extends HttpServlet {
 
     @Override

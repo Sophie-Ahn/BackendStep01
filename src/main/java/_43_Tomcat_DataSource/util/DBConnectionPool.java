@@ -1,8 +1,7 @@
-package _41_ConnectionPool.util;
+package _43_Tomcat_DataSource.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 

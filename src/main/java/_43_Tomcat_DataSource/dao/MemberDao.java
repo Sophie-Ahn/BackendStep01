@@ -1,8 +1,8 @@
-package _41_ConnectionPool.dao;
+package _43_Tomcat_DataSource.dao;
 
-import _41_ConnectionPool.util.DBConnectionPool;
-import _41_ConnectionPool.vo.Member;
+import _43_Tomcat_DataSource.vo.Member;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,6 @@ import java.util.List;
 * 이 클래스로 만들어진 오브젝트를 Dao라고 부른다.
 */
 public class MemberDao {
-//    Connection connection;
     private String strSelectList = "SELECT mno, mname, email,cre_date FROM members ORDER BY mno ASC";
     private String strInsert = "INSERT INTO members(email, pwd,mname, cre_date,mod_date) VALUES(?,?,?,NOW(),NOW())";
     private String strDelete = "DELETE FROM members WHERE mno = ?";
@@ -22,20 +21,18 @@ public class MemberDao {
     private String strUpdate = "UPDATE members SET email = ?, mname = ?, mod_date = NOW() WHERE mno=?";
     private String strExist = "SELECT mname, email FROM members WHERE email = ? AND pwd = ?";
 
-    DBConnectionPool connPool;
-    public void setDBConnectionPool(DBConnectionPool connPool){
-        this.connPool = connPool;
-    }
-
-    /* Connection 객체 1개로 여러 메서드가 각각의 서블릿에서 호출되면
-    * rollback시 다른 명령에도 영향을 주어서 취소가 되므로
-    * 이제 ConnectionPool을 사용해서 독립적인 명령 처리가 되도록 한다.
-    * */
-//    public void setConnection(Connection connection){
-//        this.connection = connection;
+    // 우리가 만든 커넥션풀을 사용하지 않는다.
+//    DBConnectionPool connPool;
+//    public void setDBConnectionPool(DBConnectionPool connPool){
+//        this.connPool = connPool;
 //    }
 
-    // MemberListServlet.java에서 필요
+    // apache 라이브러리에서 제공하는 DataSource내에 커넥션풀이 포함되어 있다.
+    DataSource ds;
+    public void setDataSource(DataSource ds){
+        this.ds = ds;
+    }
+
     public List<Member> selectList() throws Exception {
         Connection connection = null;
         PreparedStatement pstmt = null;
@@ -43,7 +40,8 @@ public class MemberDao {
 
         try{
             // 커넥션풀에서 객체를 빌려온다.
-            connection = this.connPool.getConnection(); // 추가
+//            connection = this.connPool.getConnection(); // 추가
+            connection = this.ds.getConnection();
 
             pstmt = connection.prepareStatement(strSelectList);
             rs = pstmt.executeQuery();
@@ -63,10 +61,20 @@ public class MemberDao {
         } finally {
             try{if(rs != null) rs.close();}catch (Exception e){}
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
-            if(connection != null){
-                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
-                connPool.returnConnection(connection);
+//            if(connection != null){
+//                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+//                connPool.returnConnection(connection);
+//            }
+
+            // DataSource가 제공하는 connection의 close()는 서버와의 단절이 아니라 커넥션풀로의 반환을 의미한다.
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+
             }
+
         }
     }
 
@@ -77,7 +85,8 @@ public class MemberDao {
 
         try {
             // 커넥션풀에서 객체를 빌려온다.
-            connection = this.connPool.getConnection(); // 추가
+//            connection = this.connPool.getConnection(); // 추가
+            connection = this.ds.getConnection();
 
             pstmt = connection.prepareStatement(strInsert);
             pstmt.setString(1, member.getEmail());
@@ -97,9 +106,16 @@ public class MemberDao {
         } finally {
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
 
-            if(connection != null){
-                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
-                connPool.returnConnection(connection);
+//            if(connection != null){
+//                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+//                connPool.returnConnection(connection);
+//            }
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+
             }
         }
     }
@@ -111,7 +127,8 @@ public class MemberDao {
 
         try {
             // 커넥션풀에서 객체를 빌려온다.
-            connection = this.connPool.getConnection(); // 추가
+//            connection = this.connPool.getConnection(); // 추가
+            connection = this.ds.getConnection();
 
             pstmt = connection.prepareStatement(strDelete);
             pstmt.setInt(1, no);
@@ -121,9 +138,16 @@ public class MemberDao {
             throw e;
         } finally {
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
-            if(connection != null){
-                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
-                connPool.returnConnection(connection);
+//            if(connection != null){
+//                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+//                connPool.returnConnection(connection);
+//            }
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+
             }
         }
     }
@@ -136,7 +160,8 @@ public class MemberDao {
 
         try {
             // 커넥션풀에서 객체를 빌려온다.
-            connection = this.connPool.getConnection(); // 추가
+//            connection = this.connPool.getConnection(); // 추가
+            connection = this.ds.getConnection();
 
             pstmt = connection.prepareStatement(strSelectOne);
             pstmt.setInt(1, no);
@@ -155,9 +180,16 @@ public class MemberDao {
         } finally {
             try{if(rs != null) rs.close();}catch (Exception e){}
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
-            if(connection != null){
-                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
-                connPool.returnConnection(connection);
+//            if(connection != null){
+//                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+//                connPool.returnConnection(connection);
+//            }
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+
             }
         }
     }
@@ -169,7 +201,8 @@ public class MemberDao {
 
         try {
             // 커넥션풀에서 객체를 빌려온다.
-            connection = this.connPool.getConnection(); // 추가
+//            connection = this.connPool.getConnection(); // 추가
+            connection = this.ds.getConnection();
 
             pstmt = connection.prepareStatement(strUpdate);
             pstmt.setString(1, member.getEmail());
@@ -181,9 +214,16 @@ public class MemberDao {
             throw e;
         } finally {
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
-            if(connection != null){
-                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
-                connPool.returnConnection(connection);
+//            if(connection != null){
+//                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+//                connPool.returnConnection(connection);
+//            }
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+
             }
         }
     }
@@ -196,7 +236,8 @@ public class MemberDao {
 
         try {
             // 커넥션풀에서 객체를 빌려온다.
-            connection = this.connPool.getConnection(); // 추가
+//            connection = this.connPool.getConnection(); // 추가
+            connection = this.ds.getConnection();
 
             pstmt = connection.prepareStatement(strExist);
             pstmt.setString(1, email);
@@ -215,9 +256,16 @@ public class MemberDao {
         } finally {
             try{if(rs != null) rs.close();}catch (Exception e){}
             try{if(pstmt != null) pstmt.close();}catch (Exception e){}
-            if(connection != null){
-                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
-                connPool.returnConnection(connection);
+//            if(connection != null){
+//                // 커넥션풀에서 빌려온 Connection 객체를 반납한다.
+//                connPool.returnConnection(connection);
+//            }
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+
             }
         }
     }

@@ -1,7 +1,7 @@
-package _41_ConnectionPool.servlet;
+package _43_Tomcat_DataSource.servlet;
 
-import _41_ConnectionPool.dao.MemberDao;
-import _41_ConnectionPool.vo.Member;
+import _43_Tomcat_DataSource.dao.MemberDao;
+import _43_Tomcat_DataSource.vo.Member;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/memberConnPool/add")
+@WebServlet("/memberTomcatDataSource/add")
 @SuppressWarnings("serial")
 public class MemberAddServlet extends HttpServlet {
     @Override

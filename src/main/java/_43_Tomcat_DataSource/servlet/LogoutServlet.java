@@ -1,4 +1,4 @@
-package _39_ServletContextListener.servlet;
+package _43_Tomcat_DataSource.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @SuppressWarnings("serial")
-@WebServlet("/authListener/logout")
+@WebServlet("/authTomcatDataSource/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,7 +1,7 @@
-package _39_ServletContextListener.servlet;
+package _43_Tomcat_DataSource.servlet;
 
-import _39_ServletContextListener.dao.MemberDao;
-import _39_ServletContextListener.vo.Member;
+import _43_Tomcat_DataSource.dao.MemberDao;
+import _43_Tomcat_DataSource.vo.Member;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,12 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 @SuppressWarnings("serial")
-@WebServlet("/authListener/login")
+@WebServlet("/authTomcatDataSource/login")
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,16 +38,19 @@ public class LoginServlet extends HttpServlet {
             if (member != null) {
                 HttpSession session = req.getSession();
                 session.setAttribute("member", member);
-                resp.sendRedirect("../memberListener/list");
+                resp.sendRedirect("../memberTomcatDataSource/list");
 
             } else {
                 RequestDispatcher rd = req.getRequestDispatcher(
-                        "/auth/LogInFail.jsp");
+                        "/auth/LoginFail.jsp");
                 rd.forward(req, resp);
             }
 
         } catch (Exception e) {
-
+            e.printStackTrace();
+            req.setAttribute("error", e);
+            RequestDispatcher rd = req.getRequestDispatcher("/Error.jsp");
+            rd.forward(req, resp);
         }
     }
 }

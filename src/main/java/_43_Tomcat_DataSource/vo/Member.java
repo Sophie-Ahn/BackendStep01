@@ -1,4 +1,4 @@
-package _39_ServletContextListener.vo;
+package _43_Tomcat_DataSource.vo;
 
 /* 테이블의 1개행의 데이터를 모두 묶어서 담는 클래스 객체를
    이것을 Vo(Value Object)라고 한다.

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="_41_ConnectionPool.vo.Member"%>
+<%@ page import="_43_Tomcat_DataSource.vo.Member"%>
 <%
     Member member = (Member)session.getAttribute("member");
 %>
@@ -14,7 +14,7 @@
     SPMS(Simple Project Management System)
     <% if(member.getEmail() != null){%>
     <span style="float: right;"><%=member.getName() %>
-        <a style="color: #fff;" href="<%=request.getContextPath() %>/authConnPool/logout">로그아웃</a>
+        <a style="color: #fff;" href="<%=request.getContextPath() %>/authTomcatDataSource/logout">로그아웃</a>
     </span>
     <%}%>
 </div>

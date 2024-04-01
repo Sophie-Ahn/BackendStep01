@@ -1,7 +1,7 @@
-package _41_ConnectionPool.servlet;
+package _43_Tomcat_DataSource.servlet;
 
-import _41_ConnectionPool.dao.MemberDao;
-import _41_ConnectionPool.vo.Member;
+import _43_Tomcat_DataSource.dao.MemberDao;
+import _43_Tomcat_DataSource.vo.Member;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @SuppressWarnings("serial")
-@WebServlet("/memberConnPool/list")
+@WebServlet("/memberTomcatDataSource/list")
 public class MemberListServlet extends HttpServlet {
 //    Connection conn = null;
 //    Statement stmt = null;

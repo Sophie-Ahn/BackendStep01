@@ -127,19 +127,24 @@
 
     <!--    리스너 선언-->
     <listener>
-        <listener-class>_39_ServletContextListener.listeners.ContextLoaderListener</listener-class>
+        <listener-class>_43_Tomcat_DataSource.listeners.ContextLoaderListener</listener-class>
     </listener>
 
 <!--    _28_-->
 <!--    서블릿 선언-->
     <servlet>
         <servlet-name>AppInitServlet</servlet-name>
-        <servlet-class>_39_ServletContextListener.servlet.AppInitServlet</servlet-class>
+        <servlet-class>_43_Tomcat_DataSource.servlet.AppInitServlet</servlet-class>
 <!--        컨테이너가 만들어질때 load-on-startup에서 순차적으로 만들어짐-->
         <load-on-startup>1</load-on-startup>
     </servlet>
 <!--    서블릿과 주소를 매핑-->
 
-
+<!--    Tomcat의 DataSource를 소스상에서 접근하기 위한 설정-->
+    <resource-ref>
+        <res-ref-name>jdbc/studydb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 
 </web-app>
