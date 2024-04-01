@@ -44,7 +44,7 @@
     		maxActive="10" maxIdle="3" maxWait="10000"
     		username="study"
     		password="study"
-    		driverClassName="com.mysql.cj.jdbc.Driver"
+    		driverClassName="comp.mysql.cj.jdbc.Driver"
     		url="jdbc:mysql://localhost:4306/studydb"
     		closeMethod="close"
     	/>
