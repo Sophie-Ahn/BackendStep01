@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="_33_Question.vo.Member" %>
+<%@ page import="_37_MemberListServlet_Dao.vo.Member" %>
 <html>
 <head>
     <title>회원등록</title>
