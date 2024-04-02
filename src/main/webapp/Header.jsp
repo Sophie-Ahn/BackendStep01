@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="_48_Question.vo.Member"%>
+<%@ page import="_50_MemberListController.vo.Member"%>
 <%--<%--%>
 <%--    Member member = (Member)session.getAttribute("member");--%>
 <%--%>--%>
@@ -17,7 +17,7 @@
     <c:if test="${!empty sessionScope.member and !empty sessionScope.member.email }">
 
 		<span style="float:right">${sessionScope.member.name }
-			<a style="color:white;" href="<%=request.getContextPath() %>/authLinkQuestion/logout.do">로그아웃</a>
+			<a style="color:white;" href="<%=request.getContextPath() %>/authController/logout.do">로그아웃</a>
 		</span>
 
     </c:if>
