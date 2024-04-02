@@ -127,14 +127,14 @@
 
     <!--    리스너 선언-->
     <listener>
-        <listener-class>_50_MemberListController.listeners.ContextLoaderListener</listener-class>
+        <listener-class>_54_DI_Dao.listeners.ContextLoaderListener</listener-class>
     </listener>
 
 <!--    _28_-->
 <!--    서블릿 선언-->
     <servlet>
         <servlet-name>AppInitServlet</servlet-name>
-        <servlet-class>_50_MemberListController.servlet.AppInitServlet</servlet-class>
+        <servlet-class>_54_DI_Dao.servlet.AppInitServlet</servlet-class>
 <!--        컨테이너가 만들어질때 load-on-startup에서 순차적으로 만들어짐-->
         <load-on-startup>1</load-on-startup>
     </servlet>
