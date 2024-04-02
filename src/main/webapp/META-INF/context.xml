@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+    <Resource name="jdbc/studydb" auth="Container" type="javax.sql.DataSource"
+              maxActive="10" maxIdle="3" maxWait="10000"
+              username="study"
+              password="study"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:4306/studydb"
+              closeMethod="close"
+    />
+</Context>
