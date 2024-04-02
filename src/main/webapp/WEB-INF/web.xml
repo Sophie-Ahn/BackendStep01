@@ -127,14 +127,14 @@
 
     <!--    리스너 선언-->
     <listener>
-        <listener-class>_43_Tomcat_DataSource.listeners.ContextLoaderListener</listener-class>
+        <listener-class>_48_Question.listeners.ContextLoaderListener</listener-class>
     </listener>
 
 <!--    _28_-->
 <!--    서블릿 선언-->
     <servlet>
         <servlet-name>AppInitServlet</servlet-name>
-        <servlet-class>_43_Tomcat_DataSource.servlet.AppInitServlet</servlet-class>
+        <servlet-class>_48_Question.servlet.AppInitServlet</servlet-class>
 <!--        컨테이너가 만들어질때 load-on-startup에서 순차적으로 만들어짐-->
         <load-on-startup>1</load-on-startup>
     </servlet>

@@ -6,15 +6,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="_43_Tomcat_DataSource.vo.Member"%>
-<%
-    Member member = (Member)session.getAttribute("member");
-%>
-<div style="background: #00008b; color:#fff; height:20px;padding:5px;">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="_48_Question.vo.Member"%>
+<%--<%--%>
+<%--    Member member = (Member)session.getAttribute("member");--%>
+<%--%>--%>
+<div style="background-color:#00008b;color:white;height:20px;padding:5px;">
     SPMS(Simple Project Management System)
-    <% if(member.getEmail() != null){%>
-    <span style="float: right;"><%=member.getName() %>
-        <a style="color: #fff;" href="<%=request.getContextPath() %>/authTomcatDataSource/logout">로그아웃</a>
-    </span>
-    <%}%>
+
+    <c:if test="${!empty sessionScope.member and !empty sessionScope.member.email }">
+
+		<span style="float:right">${sessionScope.member.name }
+			<a style="color:white;" href="<%=request.getContextPath() %>/authLinkQuestion/logout.do">로그아웃</a>
+		</span>
+
+    </c:if>
 </div>
