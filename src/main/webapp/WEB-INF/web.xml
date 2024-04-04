@@ -84,26 +84,36 @@
 <!--    </servlet-mapping>-->
 
 
-    <display-name>_17_</display-name>
+<!--    <display-name>_17_</display-name>-->
 <!--    컨텍스트 초기화 파라미터
     컨텍스트 : Web Application, 전체가 공유하는 영역
     context-param은 모든 서블릿이 접근 가능함
 -->
+<!--    <context-param>-->
+<!--        <param-name>driver</param-name>-->
+<!--        <param-value>com.mysql.cj.jdbc.Driver</param-value>-->
+<!--    </context-param>-->
+<!--    <context-param>-->
+<!--        <param-name>url</param-name>-->
+<!--        <param-value>jdbc:mysql://localhost:4306/studydb</param-value>-->
+<!--    </context-param>-->
+<!--    <context-param>-->
+<!--        <param-name>username</param-name>-->
+<!--        <param-value>study</param-value>-->
+<!--    </context-param>-->
+<!--    <context-param>-->
+<!--        <param-name>password</param-name>-->
+<!--        <param-value>study</param-value>-->
+<!--    </context-param>-->
+
+    <display-name>_58_</display-name>
+    <!--    컨텍스트 초기화 파라미터
+    컨텍스트 : Web Application, 전체가 공유하는 영역
+    context-param은 모든 서블릿이 접근 가능함
+-->
     <context-param>
-        <param-name>driver</param-name>
-        <param-value>com.mysql.cj.jdbc.Driver</param-value>
-    </context-param>
-    <context-param>
-        <param-name>url</param-name>
-        <param-value>jdbc:mysql://localhost:4306/studydb</param-value>
-    </context-param>
-    <context-param>
-        <param-name>username</param-name>
-        <param-value>study</param-value>
-    </context-param>
-    <context-param>
-        <param-name>password</param-name>
-        <param-value>study</param-value>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/application-context.properties</param-value>
     </context-param>
 
 
@@ -126,15 +136,15 @@
 <!--    </filter-mapping>-->
 
     <!--    리스너 선언-->
-    <listener>
-        <listener-class>_55_MemberDao_To_Interface.listeners.ContextLoaderListener</listener-class>
-    </listener>
+<!--    <listener>-->
+<!--        <listener-class>_57_Automation_FrontController.listeners.ContextLoaderListener</listener-class>-->
+<!--    </listener>-->
 
 <!--    _28_-->
 <!--    서블릿 선언-->
     <servlet>
         <servlet-name>AppInitServlet</servlet-name>
-        <servlet-class>_55_MemberDao_To_Interface.servlet.AppInitServlet</servlet-class>
+        <servlet-class>_60_Implement_Annotation.servlet.AppInitServlet</servlet-class>
 <!--        컨테이너가 만들어질때 load-on-startup에서 순차적으로 만들어짐-->
         <load-on-startup>1</load-on-startup>
     </servlet>

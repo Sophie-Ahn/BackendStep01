@@ -1,7 +1,7 @@
-package _55_MemberDao_To_Interface.servlet;
+package _56_DataBinding.servlet;
 
-import _55_MemberDao_To_Interface.controls.Controller;
-import _55_MemberDao_To_Interface.vo.Member;
+import _56_DataBinding.controls.Controller;
+import _56_DataBinding.vo.Member;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,10 +33,10 @@ public class DispatcherServlet extends HttpServlet {
         try {
             String pageControllerPath = null;
 
-            if ("/memberInterface/list.do".equals(servletPath)){
+            if ("/memberBinding/list.do".equals(servletPath)){
 //                pageController = new MemberListController();
 
-            } else if("/memberInterface/add.do".equals(servletPath)){
+            } else if("/memberBinding/add.do".equals(servletPath)){
 //                pageController = new MemberAddController();
                 if(req.getParameter("email") != null){
                     model.put("member", new Member()
@@ -45,7 +45,7 @@ public class DispatcherServlet extends HttpServlet {
                             .setName(req.getParameter("name"))
                     );
                 }
-            } else if("/memberInterface/update.do".equals(servletPath)){
+            } else if("/memberBinding/update.do".equals(servletPath)){
 //                pageController = new MemberUpdateController();
                 if(req.getParameter("email") != null){
                     model.put("member", new Member()
@@ -57,11 +57,11 @@ public class DispatcherServlet extends HttpServlet {
                     model.put("no", Integer.parseInt(req.getParameter("no")));
                 }
 
-            } else if("/memberInterface/delete.do".equals(servletPath)){
+            } else if("/memberBinding/delete.do".equals(servletPath)){
 //                pageController = new MemberDeleteController();
                 model.put("no", Integer.parseInt(req.getParameter("no")));
 
-            } else if("/authInterface/login.do".equals(servletPath)){
+            } else if("/authBinding/login.do".equals(servletPath)){
 //                pageController = new LoginController();
                 if (req.getParameter("email") != null) {
                     model.put("loginInfo", new Member()
@@ -69,7 +69,7 @@ public class DispatcherServlet extends HttpServlet {
                             .setPassword(req.getParameter("password")));
                 }
 
-            } else if("/authInterface/logout.do".equals(servletPath)){
+            } else if("/authBinding/logout.do".equals(servletPath)){
 //                pageController = new LogoutController();
 
             }
