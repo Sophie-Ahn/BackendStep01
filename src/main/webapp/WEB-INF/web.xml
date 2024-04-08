@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"-->
-<!--         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-<!--         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"-->
-<!--         version="5.0">-->
     <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
     <!-- 아래의 2가지 설정을 1번에 해주는 것이 @WebServlet 애노테이션이다.
   	   web.xml은 환경설정 파일이라 서비스 중에 수정이 가능하다는 유연성이 있지만,
@@ -144,7 +140,7 @@
 <!--    서블릿 선언-->
     <servlet>
         <servlet-name>AppInitServlet</servlet-name>
-        <servlet-class>_60_Implement_Annotation.servlet.AppInitServlet</servlet-class>
+        <servlet-class>_67_Header_Member_Project_Link.servlet.AppInitServlet</servlet-class>
 <!--        컨테이너가 만들어질때 load-on-startup에서 순차적으로 만들어짐-->
         <load-on-startup>1</load-on-startup>
     </servlet>
